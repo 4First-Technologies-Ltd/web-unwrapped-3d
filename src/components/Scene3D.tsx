@@ -47,7 +47,7 @@ export default function Scene3D() {
     // Wireframe shell
     const shell = new THREE.LineSegments(
       new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3.05, 1)),
-      new THREE.LineBasicMaterial({ color: 0x33e1c0, transparent: true, opacity: 0.55 }),
+      new THREE.LineBasicMaterial({ color: 0xe05a2b, transparent: true, opacity: 0.55 }),
     );
     group.add(shell);
 
