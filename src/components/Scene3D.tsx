@@ -47,7 +47,7 @@ export default function Scene3D() {
     // Wireframe shell
     const shell = new THREE.LineSegments(
       new THREE.EdgesGeometry(new THREE.IcosahedronGeometry(3.05, 1)),
-      new THREE.LineBasicMaterial({ color: 0x33e1c0, transparent: true, opacity: 0.55 }),
+      new THREE.LineBasicMaterial({ color: 0xe05a2b, transparent: true, opacity: 0.55 }),
     );
     group.add(shell);
 
@@ -73,7 +73,7 @@ export default function Scene3D() {
     const particles = new THREE.Points(
       pGeo,
       new THREE.PointsMaterial({
-        color: 0x9ff5e2,
+        color: 0xff9a5a,
         size: 0.045,
         transparent: true,
         opacity: 0.7,
@@ -81,11 +81,11 @@ export default function Scene3D() {
     );
     scene.add(particles);
 
-    scene.add(new THREE.AmbientLight(0x4a6b7a, 1.1));
-    const key = new THREE.PointLight(0x2ff0c0, 90, 40);
+    scene.add(new THREE.AmbientLight(0x6a4a3a, 1.1));
+    const key = new THREE.PointLight(0xff6a2a, 90, 40);
     key.position.set(6, 6, 8);
     scene.add(key);
-    const rim = new THREE.PointLight(0xff7a45, 55, 40);
+    const rim = new THREE.PointLight(0xff3a1a, 55, 40);
     rim.position.set(-8, -4, -6);
     scene.add(rim);
 
