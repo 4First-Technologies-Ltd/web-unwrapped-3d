@@ -91,7 +91,7 @@ function Index() {
       <div className="pointer-events-none fixed inset-0 -z-10 depth-veil" />
 
       <main id="top">
-        <section className="scene mx-auto flex min-h-[88vh] max-w-384 flex-col justify-center px-10 py-24">
+        <section className="scene mx-auto flex min-h-[88vh] max-w-384 flex-col justify-center px-5 py-24 sm:px-10">
           <p className="text-xs uppercase tracking-[0.32em] text-muted-foreground">
             4First Technologies Limited · Owerri, NG
           </p>
@@ -137,7 +137,7 @@ function Index() {
           </dl>
         </section>
 
-        <section id="principles" className="scene mx-auto max-w-384 px-10 py-24">
+        <section id="principles" className="scene mx-auto max-w-384 px-5 py-24 sm:px-10">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">
             § 01 — Operating principles
           </p>
@@ -158,7 +158,7 @@ function Index() {
           </div>
         </section>
 
-        <section id="capabilities" className="scene mx-auto max-w-384 px-10 py-24">
+        <section id="capabilities" className="scene mx-auto max-w-384 px-5 py-24 sm:px-10">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 02 — Capabilities</p>
@@ -200,7 +200,7 @@ function Index() {
           </div>
         </section>
 
-        <section id="engage" className="scene mx-auto max-w-384 px-10 py-32">
+        <section id="engage" className="scene mx-auto max-w-384 px-5 py-32 sm:px-10">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 03 — Engage</p>
           <div className="card-3d card-3d-hover floaty mt-8 rounded-sm border border-border/70 bg-card/50 p-10 backdrop-blur-xl md:p-16">
             <h2 className="max-w-2xl text-3xl md:text-5xl">

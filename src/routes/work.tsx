@@ -51,7 +51,7 @@ const CASES = [
 
 function WorkPage() {
   return (
-    <div className="mx-auto max-w-384 px-10">
+    <div className="mx-auto max-w-384 px-5 sm:px-10">
       <section className="scene border-b border-border/70 py-20 md:py-28">
         <p className="text-xs uppercase tracking-[0.3em] text-accent">§ Selected work</p>
         <h1 className="mt-6 max-w-[16ch] text-5xl md:text-7xl">
@@ -67,7 +67,7 @@ function WorkPage() {
         {CASES.map((c, i) => (
           <article
             key={i}
-            className="card-3d card-3d-hover -mx-10 grid gap-6 border-b border-border/70 px-10 py-14 last:border-b-0 md:grid-cols-[120px_1fr_1fr] md:gap-12"
+            className="card-3d card-3d-hover -mx-5 grid gap-6 border-b border-border/70 px-5 py-14 last:border-b-0 sm:-mx-10 sm:px-10 md:grid-cols-[120px_1fr_1fr] md:gap-12"
           >
             <div>
               <div className="font-display text-3xl text-primary">{c.year}</div>

@@ -7,10 +7,18 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { Menu } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "../components/ui/sheet";
 
 function NotFoundComponent() {
   return (
@@ -179,9 +187,11 @@ const NAV_LINKS = [
 ] as const;
 
 function SiteHeader() {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/60 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-384 items-center justify-between px-10 py-4">
+      <nav className="mx-auto flex max-w-384 items-center justify-between px-5 py-4 sm:px-10">
         <Link to="/" className="flex items-center gap-3">
           <img src="/favicon.png" alt="4First Technologies logo" className="h-8 w-8 rounded-sm object-cover" />
           <span className="font-display text-sm leading-tight tracking-tight">
@@ -204,10 +214,47 @@ function SiteHeader() {
         </div>
         <Link
           to="/contact"
-          className="rounded-sm border border-primary/50 px-4 py-2 text-xs uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+          className="hidden rounded-sm border border-primary/50 px-4 py-2 text-xs uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground md:inline-flex"
         >
           Start a project →
         </Link>
+
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <button
+              type="button"
+              aria-label="Open menu"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-border/70 text-foreground transition-colors hover:border-primary/60 hover:text-primary md:hidden"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="right" className="flex w-full flex-col gap-0 border-border/60 bg-background/95 backdrop-blur-xl sm:max-w-xs">
+            <SheetTitle className="sr-only">Menu</SheetTitle>
+            <div className="mt-8 flex flex-col gap-6 text-lg">
+              {NAV_LINKS.map((item) => (
+                <SheetClose asChild key={item.to}>
+                  <Link
+                    to={item.to}
+                    className="transition-colors hover:text-primary"
+                    activeOptions={{ exact: item.to === "/" }}
+                    activeProps={{ className: "text-primary" }}
+                  >
+                    {item.label}
+                  </Link>
+                </SheetClose>
+              ))}
+            </div>
+            <SheetClose asChild>
+              <Link
+                to="/contact"
+                className="mt-10 inline-flex items-center justify-center rounded-sm border border-primary/50 px-4 py-3 text-xs uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+              >
+                Start a project →
+              </Link>
+            </SheetClose>
+          </SheetContent>
+        </Sheet>
       </nav>
     </header>
   );
@@ -215,7 +262,7 @@ function SiteHeader() {
 
 function SiteFooter() {
   return (
-    <footer className="border-t border-border/60 px-10 py-16">
+    <footer className="border-t border-border/60 px-5 py-16 sm:px-10">
       <div className="mx-auto max-w-384">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>

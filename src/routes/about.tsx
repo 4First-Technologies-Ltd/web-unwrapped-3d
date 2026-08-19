@@ -121,7 +121,7 @@ const TIMELINE = [
 
 function AboutPage() {
   return (
-    <div className="mx-auto max-w-384 px-10">
+    <div className="mx-auto max-w-384 px-5 sm:px-10">
       <section className="scene border-b border-border/70 py-20 md:py-28">
         <p className="text-xs uppercase tracking-[0.3em] text-accent">§ About — 01</p>
         <h1 className="mt-6 max-w-[14ch] text-5xl md:text-7xl">

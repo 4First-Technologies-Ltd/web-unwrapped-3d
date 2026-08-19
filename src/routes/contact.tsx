@@ -118,7 +118,7 @@ function ContactPage() {
   }
 
   return (
-    <section className="scene mx-auto min-h-[80vh] max-w-384 border-b border-border/70 px-10 py-20 md:py-28">
+    <section className="scene mx-auto min-h-[80vh] max-w-384 border-b border-border/70 px-5 py-20 sm:px-10 md:py-28">
       <div className="grid gap-16 md:grid-cols-[1fr_1.2fr]">
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-accent">§ Contact</p>
