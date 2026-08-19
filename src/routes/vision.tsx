@@ -38,7 +38,8 @@ const VISION_POINTS = [
     n: "03",
     title: "To create intelligent and connected ecosystems",
     body: "We envision a future where physical infrastructure and digital platforms are deeply connected. Through IoT, artificial intelligence, cloud computing, mobile technologies, embedded systems, automation, data analytics, and other emerging technologies, we want to create ecosystems where devices, people, businesses, and institutions can communicate seamlessly. Our 4FG Digital Gas Platform is an example of this vision — rather than simply creating a device that measures the contents of an LPG cylinder, we envision a full ecosystem, an approach that can be applied to other industries too.",
-    chain: "Gas Cylinder → 4FG-Monitor → Consumer → Mobile App → Gas Supplier → Logistics Provider → Delivery → Digital Records",
+    chain:
+      "Gas Cylinder → 4FG-Monitor → Consumer → Mobile App → Gas Supplier → Logistics Provider → Delivery → Digital Records",
   },
   {
     n: "04",
@@ -57,7 +58,7 @@ const VISION_POINTS = [
   {
     n: "05",
     title: "To make technology accessible to everyone",
-    body: "Our vision is not to build technology exclusively for large corporations. We want our technology to be practical, affordable, easy to use, and adaptable to different environments — serving:",
+    body: "Our vision is not to build technology exclusively for large corporations. We want our technology to be practical, affordable, easy to use and adaptable to different environments, serving:",
     list: [
       "Individuals",
       "Families",
@@ -74,13 +75,13 @@ const VISION_POINTS = [
   {
     n: "06",
     title: "To create a safer and smarter world",
-    body: "Our long-term vision is closely connected to our belief that technology should improve the quality and safety of people's lives. We envision products that can help people monitor, predict, detect, automate, and respond to potential problems before they become serious. This is particularly relevant to our IoT products, where real-time monitoring can provide information that would otherwise be unavailable to users. Our philosophy is captured by our brand direction:",
+    body: "Our long-term vision is closely connected to our belief that technology should improve the quality and safety of people's lives. We envision products that can help people monitor, predict, detect, automate and respond to potential problems before they become serious. This is particularly relevant to our IoT products, where real-time monitoring can provide information that would otherwise be unavailable to users. Our philosophy is captured by our brand direction:",
     quote: "Smarter Tech, Safer World.",
   },
   {
     n: "07",
     title: "To become a trusted technology partner for government and institutions",
-    body: "We envision 4First becoming a trusted partner for governments, institutions, and organizations seeking to modernize their operations and services. Our goal is to participate meaningfully in the development of digitally enabled communities and institutions across Africa, contributing technology and expertise to initiatives involving:",
+    body: "We envision 4First becoming a trusted partner for governments, institutions and organizations seeking to modernize their operations and services. Our goal is to participate meaningfully in the development of digitally enabled communities and institutions across Africa, contributing technology and expertise to initiatives involving:",
     list: [
       "Digital transformation",
       "Smart infrastructure",
@@ -96,14 +97,15 @@ const VISION_POINTS = [
   {
     n: "08",
     title: "To build scalable African products for global markets",
-    body: "We do not want our products to be limited by geographical boundaries. Our vision is to identify challenges that exist in Africa and other emerging markets, develop solutions around them, and eventually take those solutions to international markets — designing our technology from the beginning with scalability, interoperability, security, reliability, and international standards in mind.",
+    body: "We do not want our products to be limited by geographical boundaries. Our vision is to identify challenges that exist in Africa and other emerging markets, develop solutions around them and eventually take those solutions to international markets, designing our technology from the beginning with scalability, interoperability, security, reliability and international standards in mind.",
     chain: "Local Problem → African Solution → Global Product",
   },
   {
     n: "09",
     title: "To build a strong culture of research and innovation",
-    body: "We envision 4First as an organization where innovation is continuous. We want our teams to constantly research emerging technologies, experiment with new ideas, test assumptions, develop prototypes, learn from failures, and improve existing products. We believe the ability to continuously learn and innovate will determine our long-term competitiveness.",
-    chain: "Research → Ideation → Prototyping → Testing → Validation → Deployment → Improvement → Scale",
+    body: "We envision 4First as an organization where innovation is continuous. We want our teams to constantly research emerging technologies, experiment with new ideas, test assumptions, develop prototypes, learn from failures and improve existing products. We believe the ability to continuously learn and innovate will determine our long-term competitiveness.",
+    chain:
+      "Research → Ideation → Prototyping → Testing → Validation → Deployment → Improvement → Scale",
   },
   {
     n: "10",
@@ -125,7 +127,7 @@ const VISION_POINTS = [
   {
     n: "11",
     title: "To build sustainable technology businesses",
-    body: "We envision 4First becoming a financially sustainable and commercially successful technology company. Innovation must ultimately create sustainable value — so our vision is to develop products with viable business models that allow us to continuously build long-term technology businesses, not short-term projects:",
+    body: "We envision 4First becoming a financially sustainable and commercially successful technology company. Innovation must ultimately create sustainable value so our vision is to develop products with viable business models that allow us to continuously build long-term technology businesses, not short-term projects:",
     list: [
       "Invest in research",
       "Improve our products",
@@ -139,7 +141,7 @@ const VISION_POINTS = [
   {
     n: "12",
     title: "To establish a portfolio of transformative products",
-    body: "Our vision is for 4First to eventually operate a portfolio of technology products addressing different sectors. Rather than being dependent on one product or one industry, we envision a company with multiple technology platforms and solutions that collectively contribute to our larger mission. The 4FG ecosystem can represent our work in energy and IoT, while future products can address other sectors such as healthcare, logistics, agriculture, education, security, commerce, and enterprise technology.",
+    body: "Our vision is for 4First to eventually operate a portfolio of technology products addressing different sectors. Rather than being dependent on one product or one industry, we envision a company with multiple technology platforms and solutions that collectively contribute to our larger mission. The 4FG ecosystem can represent our work in energy and IoT, while future products can address other sectors such as healthcare, logistics, agriculture, education, security, commerce and enterprise technology.",
   },
 ];
 
@@ -154,17 +156,27 @@ function VisionPage() {
         <div className="mt-10 grid gap-10 md:grid-cols-2">
           <p className="text-lg leading-relaxed text-muted-foreground">
             At 4First Technologies Limited, our vision is to become a leading African technology
-            company that builds innovative, intelligent, and scalable solutions capable of
-            transforming how people, businesses, industries, and institutions operate and
-            interact with technology.
+            company that builds innovative, intelligent and scalable solutions capable of
+            transforming how people, businesses, industries and institutions operate and interact
+            with technology.
           </p>
           <p className="text-lg leading-relaxed text-muted-foreground">
             We envision a future where technology is not merely a tool used by a few, but an
             accessible infrastructure for solving everyday problems, creating economic
-            opportunities, improving safety, and enabling smarter decision-making across Africa
-            and beyond.
+            opportunities, improving safety and enabling smarter decision-making across Africa and
+            beyond.
           </p>
         </div>
+      </section>
+
+      <section className="border-b border-border/70 py-20 md:py-28">
+        <p className="text-xs uppercase tracking-[0.3em] text-accent">§ Vision statement</p>
+        <blockquote className="mt-8 max-w-4xl border-l-2 border-primary pl-8 text-2xl leading-relaxed md:text-4xl">
+          "To become a leading African technology innovation company, building intelligent,
+          accessible, and scalable solutions that connect people, businesses, devices, and
+          institutions; transform industries; create economic opportunities; improve safety and
+          efficiency; and shape a smarter, more digitally enabled world."
+        </blockquote>
       </section>
 
       <section className="border-b border-border/70 py-12">
@@ -213,14 +225,15 @@ function VisionPage() {
       <section className="border-b border-border/70 bg-card/20 py-20 md:py-28">
         <p className="text-xs uppercase tracking-[0.3em] text-accent">§ Our long-term vision</p>
         <h2 className="mt-4 max-w-3xl text-3xl md:text-5xl">
-          More than a technology company — an innovation ecosystem.
+          More than a technology company,{" "}
+          <span className="font-bold text-primary">an innovation ecosystem</span>.
         </h2>
         <div className="mt-10 grid gap-10 md:grid-cols-2">
           <p className="text-lg leading-relaxed text-muted-foreground">
             Ultimately, we envision 4First Technologies Limited becoming more than a technology
             company. We envision it becoming an innovation ecosystem — a company that identifies
-            problems, develops technology, creates products, connects stakeholders, creates
-            economic opportunities, and contributes to the digital transformation of Africa.
+            problems, develops technology, creates products, connects stakeholders, creates economic
+            opportunities, and contributes to the digital transformation of Africa.
           </p>
           <p className="text-lg leading-relaxed text-muted-foreground">
             We want to build a company whose products are used in people's homes, businesses,
@@ -228,16 +241,6 @@ function VisionPage() {
             technology that people can trust, afford, understand, and benefit from.
           </p>
         </div>
-      </section>
-
-      <section className="border-b border-border/70 py-20 md:py-28">
-        <p className="text-xs uppercase tracking-[0.3em] text-accent">§ Vision statement</p>
-        <blockquote className="mt-8 max-w-4xl border-l-2 border-primary pl-8 text-2xl leading-relaxed md:text-4xl">
-          "To become a leading African technology innovation company, building intelligent,
-          accessible, and scalable solutions that connect people, businesses, devices, and
-          institutions; transform industries; create economic opportunities; improve safety and
-          efficiency; and shape a smarter, more digitally enabled world."
-        </blockquote>
       </section>
 
       <section className="border-b border-border/70 py-20 md:py-28">

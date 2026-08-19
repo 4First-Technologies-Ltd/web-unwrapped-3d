@@ -38,14 +38,14 @@ const CASES = [
     title: "Product platform for a media venture",
     kind: "Partner engagement",
     tag: "Product Engineering",
-    body: "Full-stack platform build — web, backend, and deployment pipeline — for a sister-brand transtech venture serving urban commuters.",
+    body: "Full-stack platform build; web, backend and deployment pipeline for a sister-brand transtech venture serving urban commuters.",
   },
   {
     year: "2024",
     title: "Technology advisory · early-stage founder",
     kind: "Advisory",
     tag: "Advisory",
-    body: "Architecture selection, vendor triage, and hiring plan for a founder preparing to move from prototype to first paying customers.",
+    body: "Architecture selection, vendor triage and hiring plan for a founder preparing to move from prototype to first paying customers.",
   },
 ];
 
@@ -58,8 +58,8 @@ function WorkPage() {
           Systems in <span className="text-primary">production</span>.
         </h1>
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          A running index of what we've built, what we're building, and where we've been useful.
-          Some engagements are under NDA — reach out for a deeper conversation.
+          A running index of what we've built, what we're building and where we've been useful.
+          Some engagements are under NDA reach-out for a deeper conversation.
         </p>
       </section>
 

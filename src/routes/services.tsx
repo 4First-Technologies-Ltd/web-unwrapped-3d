@@ -26,7 +26,7 @@ const SERVICES = [
     n: "01",
     title: "Intelligent Systems",
     tag: "AI · Automation · Decision Engines",
-    body: "We embed intelligence at the point of decision. LLM-backed workflows, retrieval systems, and autonomous processes that turn ambiguous inputs into clear next steps.",
+    body: "We embed intelligence at the point of decision. LLM-backed workflows, retrieval systems and autonomous processes that turn ambiguous inputs into clear next steps.",
     deliverables: [
       "Custom AI copilots & agents",
       "Retrieval-augmented knowledge systems",
@@ -38,7 +38,7 @@ const SERVICES = [
     n: "02",
     title: "Product Engineering",
     tag: "Web · Mobile · Platform",
-    body: "End-to-end product build — from a napkin sketch to a live, monitored, scalable platform. We own the stack: frontend, backend, infra, and the operational cadence that keeps it healthy.",
+    body: "End-to-end product build from a napkin sketch to a live, monitored, scalable platform. We own the stack: frontend, backend, infra and the operational cadence that keeps it healthy.",
     deliverables: [
       "Web & mobile applications",
       "APIs, backend platforms & integrations",
@@ -50,7 +50,7 @@ const SERVICES = [
     n: "03",
     title: "Cybersecurity",
     tag: "Defence · Assurance · Response",
-    body: "Security is our co-founder practice. Threat modelling, hardening, and incident-ready operations for teams that can't afford to guess whether their systems are safe.",
+    body: "Security is our co-founder practice. Threat modelling, hardening and incident-ready operations for teams that can't afford to guess whether their systems are safe.",
     deliverables: [
       "Threat modelling & risk assessment",
       "Application & infrastructure hardening",
@@ -62,7 +62,7 @@ const SERVICES = [
     n: "04",
     title: "Advisory",
     tag: "Strategy · Architecture · Diligence",
-    body: "For founders and operators making bet-the-company technology decisions. We help you choose what to build, what to buy, and what to walk away from.",
+    body: "For founders and operators making bet-the-company technology decisions. We help you choose what to build, what to buy and what to walk away from.",
     deliverables: [
       "Technology strategy & roadmapping",
       "Architecture review & selection",
@@ -76,13 +76,13 @@ const PROCESS = [
   {
     n: "01",
     t: "Frame",
-    d: "We define the problem in plain language — the decision, the user, the constraint.",
+    d: "We define the problem in plain language the decision, the user, the constraint.",
   },
   { n: "02", t: "Build", d: "Small, senior team. Working software in weeks, not slides in months." },
   {
     n: "03",
     t: "Harden",
-    d: "Security, observability, and load-tested behaviour baked in — never bolted on.",
+    d: "Security, observability, and load-tested behaviour baked in never bolted on.",
   },
   { n: "04", t: "Operate", d: "We stay after launch. Systems get maintained by the people who built them." },
 ];
@@ -97,7 +97,7 @@ function ServicesPage() {
         </h1>
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           We're organised around the disciplines that most often collide in real products.
-          Engineering, AI, and cybersecurity aren't handed off between vendors — they're
+          Engineering, AI and cybersecurity aren't handed off between vendors they're
           practised on the same team, at the same table.
         </p>
       </section>
