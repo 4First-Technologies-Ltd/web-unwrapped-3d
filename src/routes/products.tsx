@@ -21,15 +21,6 @@ export const Route = createFileRoute("/products")({
   component: ProductsPage,
 });
 
-const SPECS = [
-  { k: "Sensing method", v: "Weight-based load cell, cylinder-agnostic mounting" },
-  { k: "Connectivity", v: "GSM / SIM cellular, no Wi-Fi or router required" },
-  { k: "Power", v: "Battery-first design with long field autonomy" },
-  { k: "Measures", v: "LPG and medical/industrial oxygen cylinders" },
-  { k: "Reporting interval", v: "Configurable telemetry, near real-time updates" },
-  { k: "Alerting", v: "Low-level SMS/app alerts before a cylinder runs out" },
-];
-
 const HOW_IT_WORKS = [
   {
     n: "01",
@@ -100,12 +91,14 @@ function ProductsPage() {
           on the wall.
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
-          <Link
-            to="/contact"
+          <a
+            href="https://4fgmonitor.com"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
           >
             Request a device →
-          </Link>
+          </a>
           <Link
             to="/about"
             className="inline-flex items-center gap-2 rounded-sm border border-border/70 px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/60 hover:text-primary"
@@ -145,24 +138,6 @@ function ProductsPage() {
                 </div>
               </div>
               <p className="max-w-3xl text-base leading-relaxed text-muted-foreground">{s.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-b border-border/70 bg-card/20 py-20 md:py-28">
-        <p className="text-xs uppercase tracking-[0.3em] text-accent">§ Specifications</p>
-        <h2 className="mt-4 text-3xl md:text-5xl">Built for the field, not the demo.</h2>
-        <div className="mt-12 divide-y divide-border/70 border-y border-border/70">
-          {SPECS.map((row) => (
-            <div
-              key={row.k}
-              className="grid grid-cols-1 gap-2 py-6 sm:grid-cols-[240px_1fr] sm:gap-8"
-            >
-              <div className="text-sm uppercase tracking-[0.14em] text-muted-foreground">
-                {row.k}
-              </div>
-              <div className="text-base">{row.v}</div>
             </div>
           ))}
         </div>
@@ -216,12 +191,14 @@ function ProductsPage() {
               deployment.
             </p>
           </div>
-          <Link
-            to="/contact"
+          <a
+            href="https://4fgmonitor.com"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
           >
             Request a device →
-          </Link>
+          </a>
         </div>
       </section>
     </div>
