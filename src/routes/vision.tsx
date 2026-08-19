@@ -26,18 +26,18 @@ const VISION_POINTS = [
   {
     n: "01",
     title: "To become a leading technology innovation company in Africa",
-    body: "We envision 4First Technologies Limited becoming a respected technology company originating from Africa and competing confidently on a global stage. Our ambition is to build products that demonstrate that world-class technology and innovation can be conceived, engineered, tested, deployed, and scaled from Africa. We want 4First to be recognized not only as a technology service provider, but as a product-driven technology company that owns, develops, and scales its own intellectual property and digital platforms.",
+    body: "We envision 4First Technologies Limited becoming a respected technology company originating from Africa and competing confidently on a global stage. Our ambition is to build products that demonstrate that world-class technology and innovation can be conceived, engineered, tested, deployed and scaled from Africa. We want 4First to be recognized not only as a technology service provider, but as a product-driven technology company that owns, develops and scales its own intellectual property and digital platforms.",
   },
   {
     n: "02",
     title: "To build technology that solves meaningful problems",
-    body: "Our vision is centered around impact. We want to identify problems that affect individuals, businesses, communities, and industries and build technology capable of solving those problems efficiently. Whether the challenge involves energy, logistics, healthcare, education, commerce, agriculture, security, business operations, or public services, we envision 4First as a company that continuously asks the question below — a mindset that will remain at the heart of our innovation.",
+    body: "Our vision is centered around impact. We want to identify problems that affect individuals, businesses, communities, and industries and build technology capable of solving those problems efficiently. Whether the challenge involves energy, logistics, healthcare, education, commerce, agriculture, security, business operations, or public services, we envision 4First as a company that continuously asks the question below a mindset that will remain at the heart of our innovation.",
     quote: "What problem exists, and how can technology solve it better?",
   },
   {
     n: "03",
     title: "To create intelligent and connected ecosystems",
-    body: "We envision a future where physical infrastructure and digital platforms are deeply connected. Through IoT, artificial intelligence, cloud computing, mobile technologies, embedded systems, automation, data analytics, and other emerging technologies, we want to create ecosystems where devices, people, businesses, and institutions can communicate seamlessly. Our 4FG Digital Gas Platform is an example of this vision — rather than simply creating a device that measures the contents of an LPG cylinder, we envision a full ecosystem, an approach that can be applied to other industries too.",
+    body: "We envision a future where physical infrastructure and digital platforms are deeply connected. Through IoT, artificial intelligence, cloud computing, mobile technologies, embedded systems, automation, data analytics and other emerging technologies, we want to create ecosystems where devices, people, businesses and institutions can communicate seamlessly. Our 4FG Digital Gas Platform is an example of this vision rather than simply creating a device that measures the contents of an LPG cylinder, we envision a full ecosystem, an approach that can be applied to other industries too.",
     chain:
       "Gas Cylinder → 4FG-Monitor → Consumer → Mobile App → Gas Supplier → Logistics Provider → Delivery → Digital Records",
   },
@@ -173,7 +173,7 @@ function VisionPage() {
         <p className="text-xs uppercase tracking-[0.3em] text-accent">§ Vision statement</p>
         <blockquote className="mt-8 max-w-4xl border-l-2 border-primary pl-8 text-2xl leading-relaxed md:text-4xl">
           "To become a leading African technology innovation company, building intelligent,
-          accessible, and scalable solutions that connect people, businesses, devices, and
+          accessible and scalable solutions that connect people, businesses, devices and
           institutions; transform industries; create economic opportunities; improve safety and
           efficiency; and shape a smarter, more digitally enabled world."
         </blockquote>

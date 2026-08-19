@@ -115,13 +115,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         property: "og:image",
-        content: "https://4firsttechnologies.com/og-image.png",
+        content: "https://4firsttechnologies.com/main-logo.png",
       },
-      { property: "og:image:width", content: "1200" },
-      { property: "og:image:height", content: "630" },
+      { property: "og:image:width", content: "500" },
+      { property: "og:image:height", content: "500" },
       {
         name: "twitter:image",
-        content: "https://4firsttechnologies.com/og-image.png",
+        content: "https://4firsttechnologies.com/main-logo.png",
       },
     ],
     links: [
