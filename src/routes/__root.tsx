@@ -135,7 +135,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/main-logo.jpeg", type: "image/jpeg" },
+      { rel: "icon", href: "/main-logo.png", type: "image/png" },
     ],
     scripts: [
       {
@@ -181,6 +181,8 @@ function RootShell({ children }: { children: ReactNode }) {
 const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
+  { to: "/mission", label: "Mission" },
+  { to: "/vision", label: "Vision" },
   { to: "/products", label: "Products" },
   { to: "/services", label: "Services" },
   { to: "/work", label: "Work" },
@@ -194,7 +196,7 @@ function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/60 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-384 items-center justify-between px-5 py-4 sm:px-10">
         <Link to="/" className="flex items-center gap-3">
-          <img src="/main-logo.jpeg" alt="4First Technologies logo" className="h-8 w-8 rounded-sm object-cover" />
+          <img src="/main-logo.png" alt="4First Technologies logo" className="h-8 w-8 rounded-sm object-cover" />
           <span className="font-display text-sm leading-tight tracking-tight">
             4First
             <span className="block text-muted-foreground">Technologies</span>
@@ -268,7 +270,7 @@ function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-3">
-              <img src="/main-logo.jpeg" alt="4First Technologies logo" className="h-8 w-8 rounded-sm object-cover" />
+              <img src="/main-logo.png" alt="4First Technologies logo" className="h-8 w-8 rounded-sm object-cover" />
               <div className="font-display text-xl">4First Technologies</div>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">

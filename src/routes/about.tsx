@@ -72,45 +72,6 @@ const CONVICTIONS = [
   },
 ];
 
-const STACK = [
-  {
-    k: "Device & Firmware",
-    items: [
-      "C / C++ on ARM microcontrollers",
-      "ESP32 & STM32 platforms",
-      "Sensor buses — I²C, SPI, UART",
-      "Low-power & battery-first design",
-    ],
-  },
-  {
-    k: "Connectivity",
-    items: [
-      "MQTT & lightweight telemetry",
-      "GSM / LTE and Wi-Fi fallback",
-      "Over-the-air firmware updates",
-      "Offline-first sync strategies",
-    ],
-  },
-  {
-    k: "Platform & Cloud",
-    items: [
-      "TypeScript, Node.js & React",
-      "Time-series ingestion & alerting",
-      "Cloud infrastructure & DevOps",
-      "Observability & fleet dashboards",
-    ],
-  },
-  {
-    k: "Intelligence & Security",
-    items: [
-      "Anomaly detection on live streams",
-      "LLM-backed workflows & agents",
-      "Threat modelling & hardening",
-      "Incident-ready operations",
-    ],
-  },
-];
-
 const TIMELINE = [
   {
     y: "2026",
@@ -201,34 +162,7 @@ function AboutPage() {
       </section>
 
       <section className="border-b border-border/70 py-20 md:py-28">
-        <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 04 — The stack</p>
-        <h2 className="mt-4 text-3xl md:text-5xl">What the work is made of.</h2>
-        <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
-          Tools change; the standard doesn't. This is the working set we reach for today, chosen
-          for reliability under real-world conditions rather than novelty.
-        </p>
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {STACK.map((col) => (
-            <div
-              key={col.k}
-              className="card-3d card-3d-hover rounded-sm border border-border/70 bg-card/50 p-8 backdrop-blur-xl"
-            >
-              <div className="text-xs uppercase tracking-[0.2em] text-primary">{col.k}</div>
-              <ul className="mt-5 space-y-2.5 text-sm">
-                {col.items.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="font-mono text-primary">→</span>
-                    <span className="text-muted-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-b border-border/70 py-20 md:py-28">
-        <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 05 — Timeline</p>
+        <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 04 — Timeline</p>
         <h2 className="mt-4 text-3xl md:text-5xl">Short history, long horizon.</h2>
         <div className="mt-12 divide-y divide-border/70 border-y border-border/70">
           {TIMELINE.map((row) => (

@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Intelligent systems, product engineering, cybersecurity and advisory — built in Owerri, shipped everywhere.",
+          "Intelligent systems, product engineering, cybersecurity and advisory, built in Owerri, shipped everywhere.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -34,7 +34,7 @@ const principles = [
   {
     n: "02",
     t: "Intelligence as infrastructure",
-    d: "AI isn't a feature — it's the wiring. We embed it where decisions happen, not where demos look good.",
+    d: "AI isn't a feature, it's the wiring. We embed it where decisions happen, not where demos look good.",
   },
   {
     n: "03",
@@ -102,8 +102,7 @@ function Index() {
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
             We're a Nigerian technology company building the invisible layer between people and
-            their decisions — software, AI, and secure infrastructure that removes the guesswork
-            from work, mobility, and daily life.
+            their decisions,software, AI and secure infrastructure that removes the guesswork from work, mobility, and daily life.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link

@@ -82,13 +82,12 @@ function ProductsPage() {
       <section className="scene border-b border-border/70 py-20 md:py-28">
         <p className="text-xs uppercase tracking-[0.3em] text-accent">§ Products</p>
         <h1 className="mt-6 max-w-[18ch] text-5xl md:text-7xl">
-          4FG-Monitor: gas you can <span className="text-primary">see</span>.
+          4FG-Monitor: Gas you can <span className="text-primary">see</span>.
         </h1>
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
           Our flagship IoT device turns a sealed, opaque LPG or oxygen cylinder into something you
-          can actually monitor — real-time levels, low-gas alerts, and usage history, delivered
-          over cellular connectivity to a device that can't be hot-fixed from a laptop once it's
-          on the wall.
+          can actually monitor like real-time levels, low-gas alerts, and usage history, delivered
+          over cellular connectivity to a device that can't be hot-fixed from a laptop once it's on the wall.
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
           <a

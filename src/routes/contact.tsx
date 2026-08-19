@@ -142,7 +142,10 @@ function ContactPage() {
               value="4First Technologies Ltd"
               href="https://www.linkedin.com/company/4firsttechnologieslimited/"
             />
-            <Detail label="Studio" value="Owerri · Imo State · Nigeria" />
+            <Detail
+              label="Studio"
+              value="Head Office: Imo Digital City Limited, 23 Egbu Road, Owerri, Imo State, Nigeria."
+            />
             <Detail label="Hours" value="Mon – Fri · 09:00 – 18:00 WAT" />
 
             <div>
