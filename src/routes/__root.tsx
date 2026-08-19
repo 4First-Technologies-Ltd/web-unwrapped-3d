@@ -77,14 +77,44 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "4First Technologies — Smarter Tech, Safer World." },
+      {
+        name: "description",
+        content:
+          "4First Technologies is a Nigerian technology company building intelligent systems that eliminate uncertainty in everyday use.",
+      },
+      { name: "author", content: "4First Technologies Limited" },
+      { property: "og:site_name", content: "4First Technologies" },
+      {
+        property: "og:title",
+        content: "4First Technologies — Smarter Tech, Safer World.",
+      },
+      {
+        property: "og:description",
+        content:
+          "4First Technologies is a Nigerian technology company building intelligent systems that eliminate uncertainty in everyday use.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      {
+        name: "twitter:title",
+        content: "4First Technologies — Smarter Tech, Safer World.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "4First Technologies is a Nigerian technology company building intelligent systems that eliminate uncertainty in everyday use.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/614fc017-0427-4ad4-8678-d4b1fe56a9f6",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/614fc017-0427-4ad4-8678-d4b1fe56a9f6",
+      },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -97,9 +127,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
-
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "4First Technologies Limited",
+          alternateName: "4First Technologies",
+          url: "/",
+          description:
+            "A Nigerian technology company building intelligent systems that eliminate uncertainty in everyday use.",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Owerri",
+            addressRegion: "Imo State",
+            addressCountry: "NG",
+          },
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -121,13 +170,153 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+const NAV_LINKS = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About" },
+  { to: "/services", label: "Services" },
+  { to: "/work", label: "Work" },
+  { to: "/contact", label: "Contact" },
+] as const;
+
+function SiteHeader() {
+  return (
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/60 backdrop-blur-xl">
+      <nav className="mx-auto flex max-w-384 items-center justify-between px-10 py-4">
+        <Link to="/" className="flex items-center gap-3">
+          <img src="/favicon.png" alt="4First Technologies logo" className="h-8 w-8 rounded-sm object-cover" />
+          <span className="font-display text-sm leading-tight tracking-tight">
+            4First
+            <span className="block text-muted-foreground">Technologies</span>
+          </span>
+        </Link>
+        <div className="hidden gap-8 text-sm text-muted-foreground md:flex">
+          {NAV_LINKS.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="transition-colors hover:text-primary"
+              activeOptions={{ exact: item.to === "/" }}
+              activeProps={{ className: "text-primary" }}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+        <Link
+          to="/contact"
+          className="rounded-sm border border-primary/50 px-4 py-2 text-xs uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+        >
+          Start a project →
+        </Link>
+      </nav>
+    </header>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="border-t border-border/60 px-10 py-16">
+      <div className="mx-auto max-w-384">
+        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div>
+            <div className="flex items-center gap-3">
+              <img src="/favicon.png" alt="4First Technologies logo" className="h-8 w-8 rounded-sm object-cover" />
+              <div className="font-display text-xl">4First Technologies</div>
+            </div>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Smarter Tech, Safer World.
+            </p>
+            <p className="mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              Owerri · Imo State · Nigeria
+            </p>
+          </div>
+          <FooterCol title="Navigate" links={NAV_LINKS} />
+          <FooterCol
+            title="Practice"
+            links={[
+              { to: "/services", label: "Intelligent systems" },
+              { to: "/services", label: "Product engineering" },
+              { to: "/services", label: "Cybersecurity" },
+              { to: "/services", label: "Advisory" },
+            ]}
+          />
+          <div>
+            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
+              Elsewhere
+            </div>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a
+                  href="https://www.linkedin.com/company/4firsttechnologieslimited/"
+                  className="hover:text-primary transition"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn ↗
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:4firsttechnologieslimited@gmail.com"
+                  className="hover:text-primary transition"
+                >
+                  4firsttechnologieslimited@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="tel:+2349064768335" className="hover:text-primary transition">
+                  +234 906 476 8335
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="mt-16 flex flex-col gap-3 border-t border-border/60 pt-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
+          <div>© {new Date().getFullYear()} 4First Technologies Limited. All rights reserved.</div>
+          <div className="font-mono">RC · Nigeria — built with intent.</div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function FooterCol({
+  title,
+  links,
+}: {
+  title: string;
+  links: readonly { to: string; label: string }[];
+}) {
+  return (
+    <div>
+      <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">
+        {title}
+      </div>
+      <ul className="space-y-2 text-sm">
+        {links.map((l, i) => (
+          <li key={i}>
+            <Link to={l.to} className="hover:text-primary transition">
+              {l.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col">
+        <SiteHeader />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <SiteFooter />
+      </div>
     </QueryClientProvider>
   );
 }

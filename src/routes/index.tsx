@@ -1,4 +1,4 @@
-import { createFileRoute, ClientOnly } from "@tanstack/react-router";
+import { createFileRoute, ClientOnly, Link } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
 
 const Scene3D = lazy(() => import("@/components/Scene3D"));
@@ -90,34 +90,8 @@ function Index() {
       </div>
       <div className="pointer-events-none fixed inset-0 -z-10 depth-veil" />
 
-      <header className="sticky top-0 z-30 border-b border-border/60 bg-background/60 backdrop-blur-xl">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="font-display text-sm leading-tight tracking-tight">
-            4First
-            <span className="block text-muted-foreground">Technologies</span>
-          </a>
-          <div className="hidden gap-8 text-sm text-muted-foreground md:flex">
-            <a className="transition-colors hover:text-primary" href="#principles">
-              Principles
-            </a>
-            <a className="transition-colors hover:text-primary" href="#capabilities">
-              Services
-            </a>
-            <a className="transition-colors hover:text-primary" href="#engage">
-              Contact
-            </a>
-          </div>
-          <a
-            href="#engage"
-            className="rounded-sm border border-primary/50 px-4 py-2 text-xs uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
-          >
-            Start a project →
-          </a>
-        </nav>
-      </header>
-
       <main id="top">
-        <section className="scene mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-center px-6 py-24">
+        <section className="scene mx-auto flex min-h-[88vh] max-w-384 flex-col justify-center px-10 py-24">
           <p className="text-xs uppercase tracking-[0.32em] text-muted-foreground">
             4First Technologies Limited · Owerri, NG
           </p>
@@ -132,18 +106,18 @@ function Index() {
             from work, mobility, and daily life.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#engage"
+            <Link
+              to="/contact"
               className="rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-0.5"
             >
               Start a project →
-            </a>
-            <a
-              href="#capabilities"
+            </Link>
+            <Link
+              to="/services"
               className="rounded-sm border border-border px-6 py-3 text-sm text-foreground transition-colors hover:border-primary/60 hover:text-primary"
             >
               What we do
-            </a>
+            </Link>
           </div>
 
           <dl className="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-sm border border-border/70 bg-border/70 md:grid-cols-4">
@@ -163,7 +137,7 @@ function Index() {
           </dl>
         </section>
 
-        <section id="principles" className="scene mx-auto max-w-6xl px-6 py-24">
+        <section id="principles" className="scene mx-auto max-w-384 px-10 py-24">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">
             § 01 — Operating principles
           </p>
@@ -184,11 +158,18 @@ function Index() {
           </div>
         </section>
 
-        <section id="capabilities" className="scene mx-auto max-w-6xl px-6 py-24">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 02 — Capabilities</p>
-          <h2 className="mt-6 max-w-2xl text-3xl md:text-5xl">
-            Four disciplines. One system of thought.
-          </h2>
+        <section id="capabilities" className="scene mx-auto max-w-384 px-10 py-24">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 02 — Capabilities</p>
+              <h2 className="mt-6 max-w-2xl text-3xl md:text-5xl">
+                Four disciplines. One system of thought.
+              </h2>
+            </div>
+            <Link to="/services" className="text-sm text-primary transition hover:brightness-110">
+              Full services index →
+            </Link>
+          </div>
           <div className="mt-14 grid gap-6 md:grid-cols-2">
             {capabilities.map((c, i) => (
               <article
@@ -219,29 +200,27 @@ function Index() {
           </div>
         </section>
 
-        <section id="engage" className="scene mx-auto max-w-6xl px-6 py-32">
+        <section id="engage" className="scene mx-auto max-w-384 px-10 py-32">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 03 — Engage</p>
           <div className="card-3d card-3d-hover floaty mt-8 rounded-sm border border-border/70 bg-card/50 p-10 backdrop-blur-xl md:p-16">
             <h2 className="max-w-2xl text-3xl md:text-5xl">
               Have a system worth removing the doubt from?
             </h2>
-            <a
-              href="mailto:hello@4firsttechnologies.com"
+            <Link
+              to="/contact"
               className="mt-10 inline-flex rounded-sm bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5"
             >
               Start the conversation →
+            </Link>
+            <a
+              href="mailto:4firsttechnologieslimited@gmail.com"
+              className="mt-6 block text-sm text-muted-foreground hover:text-primary transition"
+            >
+              4firsttechnologieslimited@gmail.com
             </a>
-            <p className="mt-6 text-sm text-muted-foreground">hello@4firsttechnologies.com</p>
           </div>
         </section>
       </main>
-
-      <footer className="border-t border-border/60 px-6 py-10">
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-4 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-          <span>4First Technologies · Owerri, NG</span>
-          <span>Smarter Tech, Safer World</span>
-        </div>
-      </footer>
     </div>
   );
 }
