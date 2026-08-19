@@ -181,6 +181,7 @@ function RootShell({ children }: { children: ReactNode }) {
 const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
+  { to: "/products", label: "Products" },
   { to: "/services", label: "Services" },
   { to: "/work", label: "Work" },
   { to: "/contact", label: "Contact" },
