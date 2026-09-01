@@ -12,6 +12,8 @@ import { Menu } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { fetchSiteContent } from "../lib/cms";
+import { SITE_SETTINGS } from "../content/defaults";
 import {
   Sheet,
   SheetClose,
@@ -158,6 +160,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
   }),
+  loader: () =>
+    fetchSiteContent({ data: { slug: "__root", collections: [] } })
+      .then((c) => ({ settings: c.settings }))
+      .catch(() => ({ settings: SITE_SETTINGS })),
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -264,6 +270,9 @@ function SiteHeader() {
 }
 
 function SiteFooter() {
+  const { settings } = Route.useLoaderData();
+  const phoneHref = `tel:${settings.contact_phone.replace(/[^+\d]/g, "")}`;
+
   return (
     <footer className="border-t border-border/60 px-5 py-16 sm:px-10">
       <div className="mx-auto max-w-384">
@@ -274,7 +283,7 @@ function SiteFooter() {
               <div className="font-display text-xl">4First Technologies</div>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Smarter Tech, Safer World.
+              {settings.footer_tagline}
             </p>
             <p className="mt-6 text-xs uppercase tracking-[0.18em] text-muted-foreground">
               Owerri · Imo State · Nigeria
@@ -297,7 +306,7 @@ function SiteFooter() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://www.linkedin.com/company/4firsttechnologieslimited/"
+                  href={settings.linkedin_url}
                   className="hover:text-primary transition"
                   target="_blank"
                   rel="noreferrer"
@@ -307,15 +316,15 @@ function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="mailto:4firsttechnologieslimited@gmail.com"
+                  href={`mailto:${settings.contact_email}`}
                   className="hover:text-primary transition"
                 >
-                  4firsttechnologieslimited@gmail.com
+                  {settings.contact_email}
                 </a>
               </li>
               <li>
-                <a href="tel:+2349064768335" className="hover:text-primary transition">
-                  +234 906 476 8335
+                <a href={phoneHref} className="hover:text-primary transition">
+                  {settings.contact_phone}
                 </a>
               </li>
             </ul>

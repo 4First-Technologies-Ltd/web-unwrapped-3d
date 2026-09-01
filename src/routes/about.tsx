@@ -1,120 +1,86 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { fetchSiteContent } from "@/lib/cms";
+import {
+  buildPageHead,
+  renderHeading,
+  proseOne,
+  getPageMeta,
+  SITE_SETTINGS,
+  ABOUT_BUILD_INTRO,
+  ABOUT_DISCIPLINES,
+  ABOUT_ENGINEERING,
+  ABOUT_CONVICTIONS,
+  ABOUT_TIMELINE_INTRO,
+  ABOUT_TIMELINE,
+  type Discipline,
+  type Point,
+  type TimelineRow,
+} from "@/content/defaults";
+
+const COLLECTIONS = [
+  "about.buildIntro",
+  "about.disciplines",
+  "about.engineering",
+  "about.convictions",
+  "about.timelineIntro",
+  "about.timeline",
+];
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — 4First Technologies" },
-      {
-        name: "description",
-        content:
-          "4First Technologies is a Nigerian engineering company based in Owerri, building software and embedded systems from cloud platforms to the firmware on the device.",
+  loader: () =>
+    fetchSiteContent({ data: { slug: "about", collections: COLLECTIONS } }).catch(() => ({
+      meta: getPageMeta("about"),
+      collections: {
+        "about.buildIntro": ABOUT_BUILD_INTRO,
+        "about.disciplines": ABOUT_DISCIPLINES,
+        "about.engineering": ABOUT_ENGINEERING,
+        "about.convictions": ABOUT_CONVICTIONS,
+        "about.timelineIntro": ABOUT_TIMELINE_INTRO,
+        "about.timeline": ABOUT_TIMELINE,
       },
-      { property: "og:title", content: "About — 4First Technologies" },
-      {
-        property: "og:description",
-        content:
-          "An engineering company that builds across the full stack: software platforms, embedded systems, and the secure infrastructure between them.",
-      },
-      { property: "og:url", content: "/about" },
-    ],
-    links: [{ rel: "canonical", href: "/about" }],
-  }),
+      settings: SITE_SETTINGS,
+    })),
+  head: ({ loaderData }) => buildPageHead("about", loaderData?.meta),
   component: AboutPage,
 });
 
-const DISCIPLINES = [
-  {
-    n: "01",
-    title: "Software Platforms",
-    tag: "Web · Mobile · Cloud",
-    body: "The systems people actually touch, web and mobile applications, APIs, and the backend platforms behind them. We design for the network conditions our users really have: bandwidth-aware frontends, resilient sync, and infrastructure that degrades gracefully instead of failing loudly.",
-  },
-  {
-    n: "02",
-    title: "Embedded Systems",
-    tag: "Firmware · Sensors · Edge",
-    body: "Software that lives on hardware. Microcontroller firmware, sensor integration, power-conscious design, and the discipline of shipping code that can't be hot-fixed from a laptop. When a device is on a wall in Owerri, it has to work — offline, on battery, in heat.",
-  },
-  {
-    n: "03",
-    title: "Connected Devices & IoT",
-    tag: "Telemetry · OTA · Fleets",
-    body: "The layer that joins the two: device provisioning, telemetry pipelines, over-the-air updates, and fleet monitoring. We treat every deployed device as a production system, observable, updatable, and accounted for from first boot to end of life.",
-  },
-  {
-    n: "04",
-    title: "Intelligent & Secure Systems",
-    tag: "AI · Decision Engines · Security",
-    body: "Intelligence embedded where decisions happen, anomaly detection on sensor streams, LLM-backed workflows, automated alerting. All of it threat-modelled first, because a connected device that isn't secured is a liability with an antenna.",
-  },
-];
-
-const CONVICTIONS = [
-  {
-    n: "01",
-    title: "Hardware honesty",
-    body: "Embedded software doesn't get the luxury of 'refresh and try again.' We design for constrained memory, unreliable power, and field conditions. And we let that discipline sharpen our cloud software too.",
-  },
-  {
-    n: "02",
-    title: "The whole signal path",
-    body: "One team owns the journey from sensor reading to dashboard pixel. No hand-offs between a firmware vendor, a backend shop, and an app agency — the seams are where systems fail.",
-  },
-  {
-    n: "03",
-    title: "Built for African context",
-    body: "Intermittent connectivity, hard power cycles, dust and heat. Our systems are designed to hold state locally, sync when they can, and never leave the user guessing about what's real.",
-  },
-  {
-    n: "04",
-    title: "Security before shine",
-    body: "Secure boot, signed updates, least-privilege APIs, threat-modelled architectures. Every layer is hardened before it's beautified — trust compounds; regret is expensive.",
-  },
-];
-
-const TIMELINE = [
-  {
-    y: "2026",
-    t: "Founded",
-    d: "Established in Owerri with a mandate to build intelligent, resilient systems — software platforms and the embedded devices they speak to, engineered by one team.",
-  },
-];
-
 function AboutPage() {
+  const { collections, meta } = Route.useLoaderData();
+  const hero = meta?.hero ?? getPageMeta("about").hero;
+  const buildIntro = proseOne(collections["about.buildIntro"], ABOUT_BUILD_INTRO);
+  const engineering = proseOne(collections["about.engineering"], ABOUT_ENGINEERING);
+  const timelineIntro = proseOne(collections["about.timelineIntro"], ABOUT_TIMELINE_INTRO);
+  const disciplines =
+    (collections["about.disciplines"] as unknown as Discipline[] | undefined) ?? ABOUT_DISCIPLINES;
+  const convictions =
+    (collections["about.convictions"] as unknown as Point[] | undefined) ?? ABOUT_CONVICTIONS;
+  const timeline =
+    (collections["about.timeline"] as unknown as TimelineRow[] | undefined) ?? ABOUT_TIMELINE;
+
   return (
     <div className="mx-auto max-w-384 px-5 sm:px-10">
       <section className="scene border-b border-border/70 py-20 md:py-28">
-        <p className="text-xs uppercase tracking-[0.3em] text-accent">§ About — 01</p>
-        <h1 className="mt-6 max-w-[14ch] text-5xl md:text-7xl">
-          Software, down to the <span className="text-primary">silicon</span>.
-        </h1>
+        <p className="text-xs uppercase tracking-[0.3em] text-accent">{hero.eyebrow}</p>
+        <h1 className="mt-6 max-w-[14ch] text-5xl md:text-7xl">{renderHeading(hero.heading)}</h1>
         <div className="mt-10 grid gap-10 md:grid-cols-2">
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            4First Technologies Limited is a Nigerian technology company developing innovative IoT
-            solutions for the energy and healthcare sectors. Our flagship product, 4FG-Monitor, is
-            a smart cylinder monitoring device that provides real-time visibility into the
-            quantity of LPG or oxygen remaining in a cylinder. It uses weight-based sensing and
-            GSM connectivity to deliver accurate readings and alerts, helping households,
-            businesses, hospitals, and gas retailers improve safety, efficiency, and resource
-            management.
-          </p>
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            Beyond the device, we are building a digital gas platform that connects consumers, gas
-            retailers, distributors, and service providers. The platform enables smarter refill
-            planning, gas transactions, and data-driven management of the LPG ecosystem.
-          </p>
-          <p className="text-lg leading-relaxed text-muted-foreground md:col-span-2">
-            Our vision is to build intelligent infrastructure that makes critical gas resources
-            more visible, predictable, accessible, and easier to manage across Africa.
-          </p>
+          {(hero.intro ?? []).map((p, i) => (
+            <p
+              key={i}
+              className={`text-lg leading-relaxed text-muted-foreground${
+                i === 2 ? " md:col-span-2" : ""
+              }`}
+            >
+              {p}
+            </p>
+          ))}
         </div>
       </section>
 
       <section className="border-b border-border/70 py-12">
-        <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 02 — What we build</p>
-        <h2 className="mt-4 text-3xl md:text-5xl">Four disciplines, one signal path.</h2>
+        <p className="text-xs uppercase tracking-[0.3em] text-accent">{buildIntro.eyebrow}</p>
+        <h2 className="mt-4 text-3xl md:text-5xl">{buildIntro.heading}</h2>
         <div className="mt-8">
-          {DISCIPLINES.map((d) => (
+          {disciplines.map((d) => (
             <div
               key={d.n}
               className="grid gap-8 border-b border-border/70 py-14 last:border-b-0 md:grid-cols-[160px_1fr] md:gap-16"
@@ -139,15 +105,14 @@ function AboutPage() {
       <section className="border-b border-border/70 bg-card/20 py-20 md:py-28">
         <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 03 — How we engineer</p>
-            <h2 className="mt-4 text-3xl md:text-5xl">Constraints are the curriculum.</h2>
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">{engineering.eyebrow}</p>
+            <h2 className="mt-4 text-3xl md:text-5xl">{engineering.heading}</h2>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Building for devices in the field teaches habits that make every system better —
-              including the ones that only ever live in the cloud.
+              {engineering.body}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
-            {CONVICTIONS.map((c) => (
+            {convictions.map((c) => (
               <div
                 key={c.n}
                 className="card-3d card-3d-hover rounded-sm border border-border/70 bg-card/50 p-8 backdrop-blur-xl"
@@ -162,10 +127,10 @@ function AboutPage() {
       </section>
 
       <section className="border-b border-border/70 py-20 md:py-28">
-        <p className="text-xs uppercase tracking-[0.3em] text-accent">§ 04 — Timeline</p>
-        <h2 className="mt-4 text-3xl md:text-5xl">Short history, long horizon.</h2>
+        <p className="text-xs uppercase tracking-[0.3em] text-accent">{timelineIntro.eyebrow}</p>
+        <h2 className="mt-4 text-3xl md:text-5xl">{timelineIntro.heading}</h2>
         <div className="mt-12 divide-y divide-border/70 border-y border-border/70">
-          {TIMELINE.map((row) => (
+          {timeline.map((row) => (
             <div
               key={row.y}
               className="grid grid-cols-[100px_1fr] items-baseline gap-6 py-8 md:grid-cols-[160px_240px_1fr]"

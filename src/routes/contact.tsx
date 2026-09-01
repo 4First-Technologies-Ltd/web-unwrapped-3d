@@ -2,6 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { z } from "zod";
+import { fetchSiteContent, recordContactSubmission } from "@/lib/cms";
+import {
+  buildPageHead,
+  renderHeading,
+  getPageMeta,
+  SITE_SETTINGS,
+  CONTACT_INTERESTS,
+  type Feature,
+} from "@/content/defaults";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1).max(200),
@@ -22,19 +31,20 @@ function escapeHtml(value: string) {
 const sendContactEmail = createServerFn({ method: "POST" })
   .inputValidator(contactSchema)
   .handler(async ({ data }) => {
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey = process.env["RESEND_API_KEY"];
     if (!apiKey) {
       throw new Error("RESEND_API_KEY is not configured");
     }
-    const to = process.env.CONTACT_TO_EMAIL || "4firsttechnologieslimited@gmail.com";
-    const from = process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
+    const to = process.env["CONTACT_TO_EMAIL"] || "4firsttechnologieslimited@gmail.com";
+    const from = process.env["CONTACT_FROM_EMAIL"] || "onboarding@resend.dev";
 
-    const rows = [
+    const rows: [string, string][] = [
       ["Name", data.name],
       ["Email", data.email],
       ["Company", data.company || "—"],
       ["Interest", data.interests.length ? data.interests.join(", ") : "—"],
-    ]
+    ];
+    const rowsHtml = rows
       .map(
         ([label, value]) =>
           `<tr><td style="padding:4px 16px 4px 0;color:#666;font-size:13px;">${label}</td><td style="padding:4px 0;font-size:14px;">${escapeHtml(value)}</td></tr>`,
@@ -52,7 +62,7 @@ const sendContactEmail = createServerFn({ method: "POST" })
         to: [to],
         reply_to: data.email,
         subject: `New project intake from ${data.name}`,
-        html: `<table style="border-collapse:collapse;">${rows}</table><p style="font-size:13px;color:#666;margin:16px 0 4px;">What are they trying to solve?</p><p style="font-size:14px;white-space:pre-wrap;">${escapeHtml(data.brief)}</p>`,
+        html: `<table style="border-collapse:collapse;">${rowsHtml}</table><p style="font-size:13px;color:#666;margin:16px 0 4px;">What are they trying to solve?</p><p style="font-size:14px;white-space:pre-wrap;">${escapeHtml(data.brief)}</p>`,
         text: `Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "—"}\nInterest: ${data.interests.join(", ") || "—"}\n\n${data.brief}`,
       }),
     });
@@ -67,24 +77,24 @@ const sendContactEmail = createServerFn({ method: "POST" })
   });
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — 4First Technologies" },
-      {
-        name: "description",
-        content:
-          "Get in touch with 4First Technologies. Based in Owerri, Nigeria. We reply within two working days.",
-      },
-      { property: "og:title", content: "Contact — 4First Technologies" },
-      { property: "og:description", content: "Start a project or send a note." },
-      { property: "og:url", content: "/contact" },
-    ],
-    links: [{ rel: "canonical", href: "/contact" }],
-  }),
+  loader: () =>
+    fetchSiteContent({ data: { slug: "contact", collections: ["contact.interests"] } }).catch(
+      () => ({
+        meta: getPageMeta("contact"),
+        collections: { "contact.interests": CONTACT_INTERESTS },
+        settings: SITE_SETTINGS,
+      }),
+    ),
+  head: ({ loaderData }) => buildPageHead("contact", loaderData?.meta),
   component: ContactPage,
 });
 
 function ContactPage() {
+  const { collections, settings, meta } = Route.useLoaderData();
+  const hero = meta?.hero ?? getPageMeta("contact").hero;
+  const interests =
+    (collections["contact.interests"] as unknown as Feature[] | undefined) ?? CONTACT_INTERESTS;
+
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -97,71 +107,75 @@ function ContactPage() {
 
     const form = e.currentTarget;
     const fd = new FormData(form);
+    const payload = {
+      name: String(fd.get("name") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      company: String(fd.get("company") ?? ""),
+      interests: fd.getAll("interest").map(String),
+      brief: String(fd.get("brief") ?? ""),
+    };
     try {
-      await sendContactEmail({
-        data: {
-          name: String(fd.get("name") ?? ""),
-          email: String(fd.get("email") ?? ""),
-          company: String(fd.get("company") ?? ""),
-          interests: fd.getAll("interest").map(String),
-          brief: String(fd.get("brief") ?? ""),
-        },
-      });
+      await sendContactEmail({ data: payload });
+      // Best-effort: also store the submission in the CMS for the admin dashboard.
+      recordContactSubmission({ data: payload }).catch(() => {});
       setSent(true);
     } catch {
       setError(
-        "Something went wrong sending your message. Please try again, or email 4firsttechnologieslimited@gmail.com directly.",
+        `Something went wrong sending your message. Please try again, or email ${settings.contact_email} directly.`,
       );
     } finally {
       setSending(false);
     }
   }
 
+  const phoneHref = `tel:${settings.contact_phone.replace(/[^+\d]/g, "")}`;
+
   return (
     <section className="scene mx-auto min-h-[80vh] max-w-384 border-b border-border/70 px-5 py-20 sm:px-10 md:py-28">
       <div className="grid gap-16 md:grid-cols-[1fr_1.2fr]">
         <div>
-          <p className="text-xs uppercase tracking-[0.3em] text-accent">§ Contact</p>
-          <h1 className="mt-6 text-5xl md:text-6xl">
-            Say the <span className="text-primary">quiet</span> part loud.
-          </h1>
+          <p className="text-xs uppercase tracking-[0.3em] text-accent">{hero.eyebrow}</p>
+          <h1 className="mt-6 text-5xl md:text-6xl">{renderHeading(hero.heading)}</h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
-            Tell us the problem in plain language. If it's the kind of thing we can help with,
-            you'll hear from a founder within two working days.
+            {(hero.intro ?? []).join(" ")}
           </p>
 
           <div className="mt-12 space-y-6 border-t border-border/70 pt-8">
             <Detail
               label="Email"
-              value="4firsttechnologieslimited@gmail.com"
-              href="mailto:4firsttechnologieslimited@gmail.com"
+              value={settings.contact_email}
+              href={`mailto:${settings.contact_email}`}
             />
-            <Detail label="Phone" value="+234 906 476 8335" href="tel:+2349064768335" />
+            <Detail label="Phone" value={settings.contact_phone} href={phoneHref} />
             <Detail
               label="LinkedIn"
               value="4First Technologies Ltd"
-              href="https://www.linkedin.com/company/4firsttechnologieslimited/"
+              href={settings.linkedin_url}
             />
-            <Detail
-              label="Studio"
-              value="Head Office: Imo Digital City Limited, 23 Egbu Road, Owerri, Imo State, Nigeria."
-            />
-            <Detail label="Hours" value="Mon – Fri · 09:00 – 18:00 WAT" />
+            <Detail label="Studio" value={settings.studio_address} />
+            <Detail label="Hours" value={settings.hours} />
 
-            <div>
-              <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                Socials
+            {settings.socials.length > 0 && (
+              <div>
+                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                  Socials
+                </div>
+                <div className="mt-2 flex gap-2">
+                  {settings.socials.map((s) => (
+                    <a
+                      key={s.href}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`4First Technologies ${s.label}`}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border/70 bg-background/50 text-muted-foreground transition hover:border-primary hover:text-primary"
+                    >
+                      <ShareIcon />
+                    </a>
+                  ))}
+                </div>
               </div>
-              <a
-                href="https://linktr.ee/4firsttechnologieslimited"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="4First Technologies Linktree"
-                className="mt-2 inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border/70 bg-background/50 text-muted-foreground transition hover:border-primary hover:text-primary"
-              >
-                <ShareIcon />
-              </a>
-            </div>
+            )}
           </div>
         </div>
 
@@ -171,8 +185,8 @@ function ContactPage() {
               <div className="font-display text-6xl text-primary">✓</div>
               <h2 className="mt-6 text-3xl">Message received.</h2>
               <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-                We'll reply within two working days. In the meantime, feel free to email
-                4firsttechnologieslimited@gmail.com directly.
+                We'll reply within two working days. In the meantime, feel free to email{" "}
+                {settings.contact_email} directly.
               </p>
             </div>
           ) : (
@@ -188,17 +202,20 @@ function ContactPage() {
                   Interest
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  {["Intelligent systems", "Product engineering", "Cybersecurity", "Advisory"].map(
-                    (o) => (
-                      <label
-                        key={o}
-                        className="flex cursor-pointer items-center gap-2 rounded-sm border border-border/70 bg-background/50 px-3 py-2.5 text-sm transition hover:border-primary"
-                      >
-                        <input type="checkbox" name="interest" value={o} className="accent-primary" />
-                        {o}
-                      </label>
-                    ),
-                  )}
+                  {interests.map((o) => (
+                    <label
+                      key={o.label}
+                      className="flex cursor-pointer items-center gap-2 rounded-sm border border-border/70 bg-background/50 px-3 py-2.5 text-sm transition hover:border-primary"
+                    >
+                      <input
+                        type="checkbox"
+                        name="interest"
+                        value={o.label}
+                        className="accent-primary"
+                      />
+                      {o.label}
+                    </label>
+                  ))}
                 </div>
               </div>
               <div>
