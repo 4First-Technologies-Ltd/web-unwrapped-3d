@@ -34,7 +34,7 @@ export const SITE_SETTINGS: SiteSettings = {
     "Head Office: Imo Digital City Limited, 23 Egbu Road, Owerri, Imo State, Nigeria.",
   hours: "Mon – Fri · 09:00 – 18:00 WAT",
   footer_tagline: "Smarter Tech, Safer World.",
-  og_image_url: "https://4firsttechnologies.com/main-logo.png",
+  og_image_url: "https://4firsttechnologies.com/og-image.png",
   metrics: [
     { n: "04", l: "Practice areas" },
     { n: "100%", l: "In-house engineering" },
@@ -232,15 +232,19 @@ export function getPageMeta(slug: string): PageMeta {
 /** Build the `head()` meta/links arrays for a route from a (possibly partial) PageMeta. */
 export function buildPageHead(slug: string, m?: PageMeta | null) {
   const p = m ?? getPageMeta(slug);
+  // OG/canonical URLs must be absolute for crawlers; CMS values may be relative paths.
+  const url = p.canonical.startsWith("http")
+    ? p.canonical
+    : `https://4firsttechnologies.com${p.canonical === "/" ? "" : p.canonical}`;
   return {
     meta: [
       { title: p.meta_title },
       { name: "description", content: p.meta_description },
       { property: "og:title", content: p.og_title },
       { property: "og:description", content: p.og_description },
-      { property: "og:url", content: p.canonical },
+      { property: "og:url", content: url },
     ],
-    links: [{ rel: "canonical", href: p.canonical }],
+    links: [{ rel: "canonical", href: url }],
   };
 }
 

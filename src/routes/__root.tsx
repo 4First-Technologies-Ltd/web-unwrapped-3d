@@ -119,13 +119,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         property: "og:image",
-        content: "https://4firsttechnologies.com/main-logo.png",
+        content: "https://4firsttechnologies.com/og-image.png",
       },
-      { property: "og:image:width", content: "500" },
-      { property: "og:image:height", content: "500" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       {
         name: "twitter:image",
-        content: "https://4firsttechnologies.com/main-logo.png",
+        content: "https://4firsttechnologies.com/og-image.png",
       },
     ],
     links: [
@@ -149,7 +149,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           name: "4First Technologies Limited",
           alternateName: "4First Technologies",
-          url: "/",
+          url: "https://4firsttechnologies.com",
           description:
             "A Nigerian technology company building intelligent systems that eliminate uncertainty in everyday use.",
           address: {
