@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { fetchJobs } from "@/lib/careers";
 
 const BASE_URL = "";
 
@@ -21,8 +22,19 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/products", changefreq: "monthly", priority: "0.9" },
           { path: "/services", changefreq: "monthly", priority: "0.9" },
           { path: "/work", changefreq: "monthly", priority: "0.8" },
+          { path: "/careers", changefreq: "daily", priority: "0.7" },
           { path: "/contact", changefreq: "yearly", priority: "0.6" },
         ];
+
+        // open vacancies only — closed/expired listings drop out of discovery
+        try {
+          const { jobs } = await fetchJobs({ data: { page: 1 } });
+          for (const j of jobs) {
+            entries.push({ path: `/careers/${j.slug}`, changefreq: "weekly", priority: "0.6" });
+          }
+        } catch {
+          /* the static pages are still served */
+        }
 
         const urls = entries.map((e) =>
           [

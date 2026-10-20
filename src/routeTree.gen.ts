@@ -18,6 +18,11 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as VisionRouteImport } from './routes/vision'
 import { Route as WorkRouteImport } from './routes/work'
+import { Route as CareersIndexRouteImport } from './routes/careers.index'
+import { Route as CareersSlugRouteImport } from './routes/careers.$slug'
+import { Route as CareersAppliedRouteImport } from './routes/careers.applied'
+import { Route as CareersPrivacyRouteImport } from './routes/careers.privacy'
+import { Route as CareersApplySlugRouteImport } from './routes/careers.apply.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +69,31 @@ const WorkRoute = WorkRouteImport.update({
   path: '/work',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CareersIndexRoute = CareersIndexRouteImport.update({
+  id: '/careers/',
+  path: '/careers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersSlugRoute = CareersSlugRouteImport.update({
+  id: '/careers/$slug',
+  path: '/careers/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersAppliedRoute = CareersAppliedRouteImport.update({
+  id: '/careers/applied',
+  path: '/careers/applied',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersPrivacyRoute = CareersPrivacyRouteImport.update({
+  id: '/careers/privacy',
+  path: '/careers/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersApplySlugRoute = CareersApplySlugRouteImport.update({
+  id: '/careers/apply/$slug',
+  path: '/careers/apply/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +105,11 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vision': typeof VisionRoute
   '/work': typeof WorkRoute
+  '/careers/$slug': typeof CareersSlugRoute
+  '/careers/applied': typeof CareersAppliedRoute
+  '/careers/privacy': typeof CareersPrivacyRoute
+  '/careers/': typeof CareersIndexRoute
+  '/careers/apply/$slug': typeof CareersApplySlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +121,11 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vision': typeof VisionRoute
   '/work': typeof WorkRoute
+  '/careers/$slug': typeof CareersSlugRoute
+  '/careers/applied': typeof CareersAppliedRoute
+  '/careers/privacy': typeof CareersPrivacyRoute
+  '/careers': typeof CareersIndexRoute
+  '/careers/apply/$slug': typeof CareersApplySlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +138,11 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/vision': typeof VisionRoute
   '/work': typeof WorkRoute
+  '/careers/$slug': typeof CareersSlugRoute
+  '/careers/applied': typeof CareersAppliedRoute
+  '/careers/privacy': typeof CareersPrivacyRoute
+  '/careers/': typeof CareersIndexRoute
+  '/careers/apply/$slug': typeof CareersApplySlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +156,11 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/vision'
     | '/work'
+    | '/careers/$slug'
+    | '/careers/applied'
+    | '/careers/privacy'
+    | '/careers/'
+    | '/careers/apply/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +172,11 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/vision'
     | '/work'
+    | '/careers/$slug'
+    | '/careers/applied'
+    | '/careers/privacy'
+    | '/careers'
+    | '/careers/apply/$slug'
   id:
     | '__root__'
     | '/'
@@ -133,6 +188,11 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/vision'
     | '/work'
+    | '/careers/$slug'
+    | '/careers/applied'
+    | '/careers/privacy'
+    | '/careers/'
+    | '/careers/apply/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +205,11 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   VisionRoute: typeof VisionRoute
   WorkRoute: typeof WorkRoute
+  CareersSlugRoute: typeof CareersSlugRoute
+  CareersAppliedRoute: typeof CareersAppliedRoute
+  CareersPrivacyRoute: typeof CareersPrivacyRoute
+  CareersIndexRoute: typeof CareersIndexRoute
+  CareersApplySlugRoute: typeof CareersApplySlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +277,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers/': {
+      id: '/careers/'
+      path: '/careers'
+      fullPath: '/careers/'
+      preLoaderRoute: typeof CareersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers/$slug': {
+      id: '/careers/$slug'
+      path: '/careers/$slug'
+      fullPath: '/careers/$slug'
+      preLoaderRoute: typeof CareersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers/applied': {
+      id: '/careers/applied'
+      path: '/careers/applied'
+      fullPath: '/careers/applied'
+      preLoaderRoute: typeof CareersAppliedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers/privacy': {
+      id: '/careers/privacy'
+      path: '/careers/privacy'
+      fullPath: '/careers/privacy'
+      preLoaderRoute: typeof CareersPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers/apply/$slug': {
+      id: '/careers/apply/$slug'
+      path: '/careers/apply/$slug'
+      fullPath: '/careers/apply/$slug'
+      preLoaderRoute: typeof CareersApplySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +325,11 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   VisionRoute: VisionRoute,
   WorkRoute: WorkRoute,
+  CareersSlugRoute: CareersSlugRoute,
+  CareersAppliedRoute: CareersAppliedRoute,
+  CareersPrivacyRoute: CareersPrivacyRoute,
+  CareersIndexRoute: CareersIndexRoute,
+  CareersApplySlugRoute: CareersApplySlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

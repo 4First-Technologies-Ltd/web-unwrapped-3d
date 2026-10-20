@@ -192,6 +192,7 @@ const NAV_LINKS = [
   { to: "/products", label: "Products" },
   { to: "/services", label: "Services" },
   { to: "/work", label: "Work" },
+  { to: "/careers", label: "Careers" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
