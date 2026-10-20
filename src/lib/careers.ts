@@ -19,18 +19,36 @@ import {
 
 const PAGE_SIZE = 10;
 
+// We never use realtime, but supabase-js constructs its client eagerly and throws on runtimes
+// without a native WebSocket (Node < 22, e.g. Netlify functions). A stub transport avoids that.
+const NO_WEBSOCKET = class {} as never;
+const REALTIME_OFF = { realtime: { transport: NO_WEBSOCKET } };
+
 function anonClient() {
   const url = process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"];
   const key = process.env["SUPABASE_ANON_KEY"] ?? process.env["VITE_SUPABASE_ANON_KEY"];
   if (!url || !key) return null;
-  return createClient(url, key, { auth: { persistSession: false } });
+  try {
+    return createClient(url, key, { auth: { persistSession: false }, ...REALTIME_OFF });
+  } catch (err) {
+    console.error("[careers] could not create Supabase client", err);
+    return null;
+  }
 }
 
 function serviceClient() {
   const url = process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"];
   const key = process.env["SUPABASE_SERVICE_ROLE_KEY"];
   if (!url || !key) return null;
-  return createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+  try {
+    return createClient(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+      ...REALTIME_OFF,
+    });
+  } catch (err) {
+    console.error("[careers] could not create Supabase service client", err);
+    return null;
+  }
 }
 
 const LIST_COLUMNS =

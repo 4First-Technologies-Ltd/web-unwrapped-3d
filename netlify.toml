@@ -3,6 +3,6 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
   # Inbox addresses are public (they're on the contact page and in the source), not secrets.
   SECRETS_SCAN_OMIT_KEYS = "CAREERS_TO_EMAIL,CONTACT_TO_EMAIL,CONTACT_FROM_EMAIL"
