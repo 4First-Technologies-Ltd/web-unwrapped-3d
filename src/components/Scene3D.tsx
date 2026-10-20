@@ -13,7 +13,13 @@ export default function Scene3D() {
     if (!mount) return;
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x05070a, 0.055);
+    const isDark = () => document.documentElement.classList.contains("dark");
+    const fogColor = (dark: boolean) => (dark ? 0x05070a : 0xf2f5f7);
+    scene.fog = new THREE.FogExp2(fogColor(isDark()), 0.055);
+    const themeObserver = new MutationObserver(() => {
+      (scene.fog as THREE.FogExp2).color.set(fogColor(isDark()));
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     const camera = new THREE.PerspectiveCamera(
       50,
@@ -134,6 +140,7 @@ export default function Scene3D() {
 
     return () => {
       cancelAnimationFrame(raf);
+      themeObserver.disconnect();
       window.removeEventListener("pointermove", onPointer);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);

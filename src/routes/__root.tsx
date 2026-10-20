@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { Menu } from "lucide-react";
+import { ThemeToggle } from "../components/theme-toggle";
+import { themeInitScript } from "../lib/theme";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -172,8 +174,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <HeadContent />
       </head>
       <body>
@@ -222,12 +225,18 @@ function SiteHeader() {
             </Link>
           ))}
         </div>
-        <Link
-          to="/contact"
-          className="hidden rounded-sm border border-primary/50 px-4 py-2 text-xs uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground md:inline-flex"
-        >
-          Start a project →
-        </Link>
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
+          <Link
+            to="/contact"
+            className="inline-flex rounded-sm border border-primary/50 px-4 py-2 text-xs uppercase tracking-[0.18em] text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+          >
+            Start a project →
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-2 md:hidden">
+        <ThemeToggle />
 
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
@@ -265,6 +274,7 @@ function SiteHeader() {
             </SheetClose>
           </SheetContent>
         </Sheet>
+        </div>
       </nav>
     </header>
   );

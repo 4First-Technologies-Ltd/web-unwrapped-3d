@@ -63,6 +63,61 @@
 
 :root {
   --radius: 0.25rem;
+  color-scheme: light;
+
+  --background: oklch(0.975 0.006 215);
+  --foreground: oklch(0.2 0.02 233);
+  --card: oklch(0.995 0.003 215);
+  --card-foreground: oklch(0.2 0.02 233);
+  --popover: oklch(0.995 0.003 215);
+  --popover-foreground: oklch(0.2 0.02 233);
+  --primary: oklch(0.54 0.16 42);
+  --primary-foreground: oklch(0.99 0.005 70);
+  --secondary: oklch(0.94 0.01 225);
+  --secondary-foreground: oklch(0.2 0.02 233);
+  --muted: oklch(0.94 0.01 225);
+  --muted-foreground: oklch(0.45 0.02 225);
+  --accent: oklch(0.78 0.12 55);
+  --accent-foreground: oklch(0.2 0.02 220);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0.005 240);
+  --border: oklch(0.88 0.01 225);
+  --input: oklch(0.88 0.01 225);
+  --ring: oklch(0.54 0.16 42);
+  --chart-1: oklch(0.54 0.16 42);
+  --chart-2: oklch(0.65 0.14 55);
+  --chart-3: oklch(0.5 0.1 230);
+  --chart-4: oklch(0.6 0.09 200);
+  --chart-5: oklch(0.45 0.06 240);
+  --sidebar: oklch(0.96 0.008 220);
+  --sidebar-foreground: oklch(0.2 0.02 233);
+  --sidebar-primary: oklch(0.54 0.16 42);
+  --sidebar-primary-foreground: oklch(0.99 0.005 70);
+  --sidebar-accent: oklch(0.93 0.01 225);
+  --sidebar-accent-foreground: oklch(0.2 0.02 233);
+  --sidebar-border: oklch(0.88 0.01 225);
+  --sidebar-ring: oklch(0.54 0.16 42);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --gradient-depth: radial-gradient(
+    120% 90% at 50% 0%,
+    oklch(0.86 0.08 55 / 0.45),
+    transparent 65%
+  );
+  --gradient-edge: linear-gradient(
+    135deg,
+    oklch(0.54 0.16 42 / 0.45),
+    oklch(0.7 0.13 55 / 0.3)
+  );
+  --shadow-lift: 0 30px 70px -30px oklch(0.3 0.03 230 / 0.35);
+  --shadow-glow: 0 0 60px -10px oklch(0.54 0.16 42 / 0.3);
+}
+
+.dark {
+  color-scheme: dark;
+
   --background: oklch(0.16 0.018 235);
   --foreground: oklch(0.96 0.008 190);
   --card: oklch(0.21 0.022 233);
@@ -96,9 +151,6 @@
   --sidebar-border: oklch(0.32 0.024 230);
   --sidebar-ring: oklch(0.62 0.15 42);
 
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-
   --gradient-depth: radial-gradient(
     120% 90% at 50% 0%,
     oklch(0.34 0.06 45 / 0.5),
@@ -116,10 +168,6 @@
 @theme inline {
   --font-display: var(--font-display);
   --font-sans: var(--font-body);
-}
-
-.dark {
-  color-scheme: dark;
 }
 
 @layer base {
