@@ -390,7 +390,7 @@ async function notifyRecruiters(
       .maybeSingle();
     if (!n || n.delivery_status === "sent") return;
 
-    const recipient = n.recipient || process.env["CAREERS_TO_EMAIL"] || process.env["CONTACT_TO_EMAIL"] || "";
+    const recipient = n.recipient || process.env["CAREERS_TO_EMAIL"] || "careers@4firsttechnologies.com";
     const apiKey = process.env["RESEND_API_KEY"];
     let error: string | null = null;
     if (!recipient) error = "No recruitment notification email is configured";
